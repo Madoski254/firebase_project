@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:paddingLeft="24dp"
     android:paddingTop="8dp"
     android:paddingRight="24dp"
@@ -14,22 +13,23 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="24dp"
+        tools:layout_editor_absoluteY="8dp">
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:layout_gravity="center|center_vertical|center_horizontal"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/rubik_italic"
             android:hint="Email"
             android:text="Account Details"
             android:textAlignment="center"
-            android:textColor="#673AB7"
-
-
+            android:textColor="@color/text_input_color"
+            android:textColorHint="@color/text_input_color"
             android:textSize="24sp" />
 
         <EditText
@@ -37,9 +37,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:fontFamily="@font/rubik_italic"
+            android:fontFamily="@font/lobster_regular"
             android:hint="Firstname"
-            android:inputType="textPersonName">
+            android:inputType="textPersonName"
+                                              android:layout_marginTop="18dp"
+            android:textColor="@color/text_input_color"
+            android:textColorHint="@color/purple_500"
+            android:textSize="19sp">
 
             <requestFocus />
         </EditText>
@@ -50,49 +54,61 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:fontFamily="@font/rubik_italic"
+            android:fontFamily="@font/lobster_regular"
             android:hint="Lastname"
             android:inputType="textPersonName"
 
-            />
+            android:textColor="@color/text_input_color"
+            android:textColorHint="@color/purple_500"
+            android:textSize="19sp" />
+
 
         <EditText
             android:id="@+id/activity_register_et_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:fontFamily="@font/rubik_italic"
+            android:fontFamily="@font/lobster_regular"
             android:hint="Email"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:textColor="@color/text_input_color"
+            android:textColorHint="@color/purple_500"
+            android:textSize="19sp" />
 
         <EditText
             android:id="@+id/activity_register_et_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:fontFamily="@font/rubik_italic"
+            android:fontFamily="@font/lobster_regular"
             android:hint="Password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColor="@color/text_input_color"
+            android:textColorHint="@color/purple_500"
+            android:textSize="19sp" />
 
         <EditText
             android:id="@+id/activity_register_et_confirm_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:fontFamily="@font/rubik_italic"
+            android:fontFamily="@font/lobster_regular"
             android:hint="Confirm Password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColor="@color/text_input_color"
+            android:textColorHint="@color/purple_500"
+            android:textSize="19sp" />
 
         <Button
             android:id="@+id/activity_register_btn_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:fontFamily="@font/rubik_italic"
+            android:fontFamily="@font/lobster_regular"
             android:gravity="center_horizontal"
             android:text="Register/Sign up"
-
-            />
+            android:textSize="19sp"
+            app:backgroundTint="@color/text_input_col0r_light_mode" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

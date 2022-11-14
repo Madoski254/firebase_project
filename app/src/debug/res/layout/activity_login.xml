@@ -14,6 +14,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center_horizontal|center_vertical"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="24dp"
         tools:layout_editor_absoluteY="8dp">
@@ -25,16 +26,16 @@
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_email"
             android:ems="10"
-            android:fontFamily="@font/rubik_italic"
+            android:fontFamily="@font/lobster_regular"
             android:hint="Email"
             android:inputType="textEmailAddress"
             android:textAlignment="center"
-            android:textColor="#673AB7"
-            android:textSize="24sp">
+            android:textColor="@color/text_input_color"
+            android:textColorHint="@color/text_input_color"
+            android:textSize="20sp">
 
+            <requestFocus />
         </EditText>
-
-        <requestFocus />
 
         <EditText
             android:id="@+id/activity_login_et_password"
@@ -42,45 +43,47 @@
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_password"
             android:ems="10"
-            android:fontFamily="@font/rubik_italic"
+            android:fontFamily="@font/lobster_regular"
             android:hint="Password"
             android:inputType="textPassword"
             android:textAlignment="center"
-            android:textColor="#673AB7"
-            android:textSize="24sp" />
+            android:textColor="@color/text_input_color"
+            android:textColorHint="@color/text_input_color"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/activity_login_btn_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:fontFamily="@font/rubik_italic"
+            android:fontFamily="@font/lobster_regular"
             android:gravity="center_horizontal"
-            android:text="Login/Sign in"
-            android:textSize="25sp"
-
-            />
+            android:text="Login/Sign In"
+            android:textSize="20sp"
+            app:backgroundTint="@color/text_input_col0r_light_mode" />
 
         <Button
             android:id="@+id/activity_login_btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:fontFamily="@font/rubik_italic"
+            android:fontFamily="@font/lobster_regular"
             android:gravity="center_horizontal"
             android:text="Register/Sign up"
-
-            android:textSize="25sp" />
+            android:textSize="21sp"
+            app:backgroundTint="@color/text_input_col0r_light_mode" />
 
         <TextView
             android:id="@+id/activity_login_tv_forgot_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:fontFamily="@font/rubik_italic"
+            android:fontFamily="@font/lobster_regular"
             android:text="Forgot password"
             android:textAlignment="center"
-            android:textSize="20sp" />
+            android:textColor="@color/text_input_color"
+            android:textColorHint="@color/text_input_color"
+            android:textSize="21sp" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
