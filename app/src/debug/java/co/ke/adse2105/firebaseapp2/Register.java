@@ -90,7 +90,6 @@ public class Register extends AppCompatActivity {
 
     /**
      * Method to validate the input data before submitting it to the Firebase database
-     *
      * @param
      * @return boolean indicating whether data has bee saved
      */
@@ -109,7 +108,7 @@ public class Register extends AppCompatActivity {
         }
 
         if (lname.isEmpty()) {
-            etLastname.setError("Your First name is required");
+            etLastname.setError("Your last name is required");
             return false;
         }
 
@@ -123,6 +122,7 @@ public class Register extends AppCompatActivity {
                 "-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+))")) {
             etMail.setError("Valid email required");
             Toast.makeText(getApplicationContext(), "Please enter a valid email Address", Toast.LENGTH_SHORT).show();
+            return false;
         }
 
         if (password.isEmpty()) {
@@ -163,62 +163,61 @@ public class Register extends AppCompatActivity {
         if (checkCredentials())
             return; //Stop method execution
 
-            //Once the details are successfully validated
-            String fname = etFirstname.getText().toString().trim();
-            String lname = etLastname.getText().toString().trim();
-            String email = etMail.getText().toString().trim();
-            String password = etPassword.getText().toString().trim();
-            String confirmPassword = etConfirmPassword.getText().toString().trim();
+        //Once the details are successfully validated
+        String fname = etFirstname.getText().toString().trim();
+        String lname = etLastname.getText().toString().trim();
+        String email = etMail.getText().toString().trim();
+        String password = etPassword.getText().toString().trim();
+        String confirmPassword = etConfirmPassword.getText().toString().trim();
 
-            //Display the progress dialog
-            progressDialog.setMessage("Creating YOUR account, please wait");
-            progressDialog.show();
+        //Display the progress dialog
+        progressDialog.setMessage("Creating your account, please wait");
+        progressDialog.show();
 
-            //Code to create the users is waiting to register
-            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this,
-                    task ->
-                    {
-                        progressDialog.dismiss();
-                        if (task.isSuccessful()) {
-                            //Gte a reference to the current user
-                            FirebaseUser currentUser = mAuth.getCurrentUser();
-                            //Get the current user's unique ID
-                            String userID = currentUser.getUid();
+        //Code to create the users is waiting to register
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this,
+                task ->
+                {
+                    progressDialog.dismiss();
+                    if (task.isSuccessful()) {
+                        //Get a reference to the current user
+                        FirebaseUser currentUser = mAuth.getCurrentUser();
+                        //Get the current user's unique ID
+                        String userID = currentUser.getUid();
 
-                            //Declare and instantiate an AppUser obj
-                            AppUser appUser = new AppUser(fname, lname,email,hashPassword(password));
+                        //Declare and instantiate an AppUser obj
+                        AppUser appUser = new AppUser(fname, lname, email, hashPassword(password));
 
-                            //Write the current user
-                            databaseUsers.child(userID).setValue(appUser).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    Toast.makeText(Register.this, "User " + lname
-                                            + " Successfully created!", Toast.LENGTH_SHORT).show();
+                        //Write the current user
+                        databaseUsers.child(userID).setValue(appUser).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(Register.this, "User " + lname
+                                        + " Successfully created!", Toast.LENGTH_SHORT).show();
 
-                                    //Redirect the user to the application's main screen/Activity
-                                    startActivity(new Intent(getApplicationContext(),
-                                            MainActivity.class));
-                                    finish();
-                                }
-                            });
-                        } else {
-                            Toast.makeText(Register.this, "User account failed"
-                                    , Toast.LENGTH_SHORT).show();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                public void onFailure(@NonNull Exception e) {
-                    if (e instanceof FirebaseAuthUserCollisionException) {
-                        Toast.makeText(Register.this, "Email address is already being used"
-                                , Toast.LENGTH_SHORT).show();
+                                //Redirect the user to the application's main screen/Activity
+                                startActivity(new Intent(getApplicationContext(),
+                                        MainActivity.class));
+                                finish();
+                            }
+                        });
                     } else {
-                        Toast.makeText(Register.this, e.getLocalizedMessage()
+                        Toast.makeText(Register.this, "User account failed"
                                 , Toast.LENGTH_SHORT).show();
                     }
+                }).addOnFailureListener(new OnFailureListener() {
+            public void onFailure(@NonNull Exception e) {
+                if (e instanceof FirebaseAuthUserCollisionException) {
+                    Toast.makeText(Register.this, "Email address is already being used"
+                            , Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(Register.this, e.getLocalizedMessage()
+                            , Toast.LENGTH_SHORT).show();
                 }
-            });
-
-        }
-
+            }
+        });
 
     }
+
+}
 
