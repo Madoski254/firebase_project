@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
 
 import butterknife.BindView;
@@ -32,7 +33,7 @@ public class Login extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
 
-    //Declare button objs
+    //Declare button objects
     Button btnLogin, btnRegister;
     private ProgressDialog progressDialog;
     EditText etEmail, etPassword;
@@ -40,7 +41,6 @@ public class Login extends AppCompatActivity {
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.activity_login_tv_forgot_password)
     TextView tvForgotPassword;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +58,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null)
+                if (user != null) //Check if the user is logged in
                     Toast.makeText(Login.this, "Signed in!", Toast.LENGTH_SHORT).show();
                 else
                     Toast.makeText(Login.this, "Signed out!", Toast.LENGTH_SHORT).show();
@@ -98,10 +98,10 @@ public class Login extends AppCompatActivity {
         if (!validateLoginDetails())
             return;
 
-        final String email = etEmail.toString().trim();
-        final String password = etEmail.toString().trim();
+        final String email = etEmail.getText().toString().trim();
+        final String password = etPassword.getText().toString().trim();
 
-        //Try rto sing in the user and display the progress dialog
+        //Try to sign in the user and display the progress dialog
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this,
                 new OnCompleteListener<AuthResult>() {
                     @Override
@@ -115,7 +115,7 @@ public class Login extends AppCompatActivity {
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             finish();
                         } else {
-                            Toast.makeText(Login.this, "Signed in sfailed!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login.this, "Signed in failed!", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -123,13 +123,19 @@ public class Login extends AppCompatActivity {
                 new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        if (e instanceof FirebaseAuthInvalidCredentialsException) {
-                            Toast.makeText(Login.this, "Invalid Password!", Toast.LENGTH_SHORT).show();
-                        } else if (e instanceof FirebaseAuthInvalidCredentialsException) {
-                            Toast.makeText(Login.this, "Invalid Email Address!", Toast.LENGTH_SHORT).show();
+                        if(e instanceof FirebaseAuthInvalidCredentialsException){
+                            Toast.makeText(Login.this, "Invalid Password!",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        else if(e instanceof FirebaseAuthInvalidUserException){
+                            Toast.makeText(Login.this, "Invalid Email Address",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Toast.makeText(Login.this, e.getLocalizedMessage(),
+                                    Toast.LENGTH_SHORT).show();
                         }
                     }
-
                 });
 
     }
@@ -156,7 +162,7 @@ public class Login extends AppCompatActivity {
             return false;
         }
 
-        return false;
+        return true;
     }
 
     @SuppressLint("NonConstrainResourceId")
@@ -185,28 +191,28 @@ public class Login extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         Toast.makeText(getApplicationContext(), "Check email for password reset instruction", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Error resting password ,Please try again latter...", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Error resting password ,please confirm you gave us the correct email and password  Please try again latter...", Toast.LENGTH_LONG).show();
                     }
                 }
             });
         }
     }
-        //Override the onStart()  & onstop method
-        @Override
-        protected void onStart() {
-            super.onStart();
-            //Add the auth listener
-            mAuth.addAuthStateListener(mAuthStateListener);
-        }
 
-        @Override
-        protected void onStop() {
-            super.onStop();
-            //Add the auth listener
-        if(mAuthStateListener != null)
-            mAuth.addAuthStateListener(mAuthStateListener);
-        }
+    //Override the onStart()  & onStop method
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //Add the auth listener
+        mAuth.addAuthStateListener(mAuthStateListener);
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //Add the auth listener
+        if (mAuthStateListener != null)
+            mAuth.addAuthStateListener(mAuthStateListener);
+    }
 
 
 }

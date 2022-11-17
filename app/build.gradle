@@ -3,10 +3,11 @@ plugins {
 
     //To delete if it doesn't work
     // Add the Google services Gradle plugin
-    id 'com.google.gms.google-services'
-
 
 }
+
+apply plugin:'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     namespace 'co.ke.adse2105.firebaseapp2'

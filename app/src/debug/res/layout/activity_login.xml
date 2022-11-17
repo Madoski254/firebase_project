@@ -52,17 +52,6 @@
             android:textSize="20sp" />
 
         <Button
-            android:id="@+id/activity_login_btn_register"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:fontFamily="@font/lobster_regular"
-            android:gravity="center_horizontal"
-            android:text="Login/Sign In"
-            android:textSize="20sp"
-            app:backgroundTint="@color/text_input_col0r_light_mode" />
-
-        <Button
             android:id="@+id/activity_login_btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -71,6 +60,17 @@
             android:gravity="center_horizontal"
             android:text="Register/Sign up"
             android:textSize="21sp"
+            app:backgroundTint="@color/text_input_col0r_light_mode" />
+
+        <Button
+            android:id="@+id/activity_login_btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/lobster_regular"
+            android:gravity="center_horizontal"
+            android:text="Login/Sign In"
+            android:textSize="20sp"
             app:backgroundTint="@color/text_input_col0r_light_mode" />
 
         <TextView

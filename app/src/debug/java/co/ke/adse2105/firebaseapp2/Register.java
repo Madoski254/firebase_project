@@ -89,9 +89,9 @@ public class Register extends AppCompatActivity {
 
 
     /**
-     * Method to validate the input data before submitting it to the Firebase database
-     * @param
-     * @return boolean indicating whether data has bee saved
+     * Method to validate the input data before submitting it to the firebase database
+     *
+     * @return boolean indicating whether all the data has been successfully validated
      */
 
     private boolean checkCredentials() {
@@ -131,7 +131,7 @@ public class Register extends AppCompatActivity {
             return false;
         }
 
-        if (password.matches("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}")) {
+        if (!password.matches("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}")) {
             etPassword.setError("Insecure password detected");
             Toast.makeText(getApplicationContext(), "Please enter a password that is at least 8 characters long,less than 15 characters" +
                     "contains a numbers mix of lowercase & uppercase letters ", Toast.LENGTH_SHORT).show();
@@ -160,7 +160,7 @@ public class Register extends AppCompatActivity {
 
     private void createUserAccount() {
         //Validate the users details
-        if (checkCredentials())
+        if (!checkCredentials())
             return; //Stop method execution
 
         //Once the details are successfully validated
@@ -188,7 +188,7 @@ public class Register extends AppCompatActivity {
                         //Declare and instantiate an AppUser obj
                         AppUser appUser = new AppUser(fname, lname, email, hashPassword(password));
 
-                        //Write the current user
+                        //Write the current user details to the firebase Realtime database
                         databaseUsers.child(userID).setValue(appUser).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
@@ -216,8 +216,6 @@ public class Register extends AppCompatActivity {
                 }
             }
         });
-
     }
-
 }
 
