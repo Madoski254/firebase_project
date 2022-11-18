@@ -66,13 +66,20 @@ public class Login extends AppCompatActivity {
             }
         };
 
-
         //Instantiate the views/ui widgets
         btnLogin = findViewById(R.id.activity_login_btn_login);
         btnRegister = findViewById(R.id.activity_login_btn_register);
         etEmail = findViewById(R.id.activity_login_et_email);
         etPassword = findViewById(R.id.activity_login_et_password);
         progressDialog = new ProgressDialog(this);
+
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signInUser();
+            }
+        });
 
         //Event handling for the Register button
         btnRegister.setOnClickListener(new View.OnClickListener() {
@@ -84,12 +91,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signInUser();
-            }
-        });
+
 
     }
 

@@ -52,7 +52,7 @@
             android:textSize="20sp" />
 
         <Button
-            android:id="@+id/activity_login_btn_login"
+            android:id="@+id/activity_login_btn_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
@@ -63,7 +63,7 @@
             app:backgroundTint="@color/text_input_col0r_light_mode" />
 
         <Button
-            android:id="@+id/activity_login_btn_register"
+            android:id="@+id/activity_login_btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
