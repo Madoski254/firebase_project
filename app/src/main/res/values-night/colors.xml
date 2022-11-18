@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="text_input_color">#673AB7</color>
+    <color name="text_input_col0r_light_mode">#E16D64</color>
+    <color name="btn_input">#D35E3A</color>
+</resources>
