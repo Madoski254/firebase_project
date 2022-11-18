@@ -12,7 +12,6 @@ public class AppUser implements Serializable
     private String password;
     private Date joinDate;
 
-
     public AppUser(String firstname, String lastname, String email, String password ) {
         this.firstname = firstname;
         this.lastname = lastname;
@@ -20,7 +19,6 @@ public class AppUser implements Serializable
         this.password = password;
         this.joinDate = Calendar.getInstance().getTime();
     }
-
 
     public String getFirstname() {
         return firstname;
