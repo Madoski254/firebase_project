@@ -148,7 +148,7 @@ public class Register extends AppCompatActivity {
         }
 
         //When all the above are met/passed data should be ok
-        return false;
+        return true;
 
     }
 
@@ -202,13 +202,13 @@ public class Register extends AppCompatActivity {
                             }
                         });
                     } else {
-                        Toast.makeText(Register.this, "User account failed"
+                        Toast.makeText(Register.this, "User account creation failed!"
                                 , Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             public void onFailure(@NonNull Exception e) {
                 if (e instanceof FirebaseAuthUserCollisionException) {
-                    Toast.makeText(Register.this, "Email address is already being used"
+                    Toast.makeText(Register.this, "Email address is already being used!"
                             , Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(Register.this, e.getLocalizedMessage()
